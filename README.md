@@ -1,8 +1,6 @@
 # espMCUME (M.CU.M.E = Multi CompUter Machine Emulator)
-A collection of 80th game Console Emulators and Computer for the ESP32 MCU
-<p>
-  <img src="/images/logo.png" width="400" />
-</p>
+A collection of 80th game Console and Computer emulators for the ESP32 MCU
+<img src="/images/logo.png" width="400" />
 <p float="left">
   <img src="/images/full2.jpg" width="400" />
   <img src="/images/minimal.jpg" width="400" /> 
