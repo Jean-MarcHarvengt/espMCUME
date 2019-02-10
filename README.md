@@ -5,7 +5,7 @@ A collection of 80th game Console and Computer emulators for the ESP32 MCU
 </p>
 
 # Featuring
-5 game consoles are currently supported:
+5 game consoles:
 Atari2600 (espvcs), Philips Videopac/Odyssey (espo2em), Colecovision (espcolem), NES (espnes) and Atari5200 (esp5200).<br>
 4 computer cores:
 Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
