@@ -1,4 +1,4 @@
-# espMCUME
+# espMCUME (M.CU.M.E for Multi CompUter Machine Emulator)
 A collection of 80th game Console Emulators and Computer for the ESP32 MCU
 <p float="left">
   <img src="/images/full2.jpg" width="400" />
@@ -15,12 +15,6 @@ A collection of 80th game Console Emulators and Computer for the ESP32 MCU
 Atari2600 (espvcs), Philips Videopac/Odyssey (espo2em), Colecovision (espcolem), NES (espnes) and Atari5200 (esp5200).<br>
 4 computer cores:
 Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
-
-All emulators support both ILI9341 TFT and VGA output using the uVGA library https://github.com/qix67/uVGA
-<br>
-Can be compiled at 144MHz,180MHz and 240 MHz (180MHz is best for all!), only
-NES requires 240Mhz for better performances.
-
 
 # Minimalrequirements:
 - ESP32 Node32S sdk chip
