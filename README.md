@@ -10,7 +10,7 @@ Atari2600 (espvcs), Philips Videopac/Odyssey (espo2em), Colecovision (espcolem),
 4 computer cores:
 Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
 
-# Minimalrequirements:
+# Minimal requirements:
 - ESP32 Node32S sdk chip
 - ILI9341 display with SD card (2.2/2.8 inches version)
 - Analog joypad (Arduino or PSP like)
@@ -38,9 +38,8 @@ Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
   - "coleco" => for colem, put your Colecovision roms here (.rom, including coleco.rom)
   - "nes"  => for nes, put your .nes files here, onlt 32k games are supported (galaga,xevious,mario1...)
   - "spec" => for speccy, put your ".z80" or ".sna" files here into sub-dirs or not ( max 48K )
-  - "z81"  => for 81, put your ".p", ".81"(, ".56") ".80" or ".o" files here, into sub-dirs or not ( max 56K )
-  - "cal.cfg"  
-- insert the microSD in the teensy
+  - "z81"  => for 81, put your ".p", ".81"(, ".56") ".80" or ".o" files here, into sub-dirs or not ( max 56K ) 
+- insert the SD in the ILI9341 SD slot
 
 # Compilation
 - go to espboot directory first:
