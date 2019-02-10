@@ -17,12 +17,12 @@ Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
 - 3 buttons (FIRE, USER1 and USER2)
 
 # Optional requirements:
-- I2C custom keyboard using 
+- I2C custom keyboard (for computers emulators) 
 
 # Wiring
 - see pinout.txt file in the project
 
-# I2C keyboard for computers emulators (best to have)
+# I2C keyboard (best to have)
 - see pinout.txt file in i2ckeyboard sub-directory
 - the I2C keyboard is using a separate atmega328p MCU handling the keys matrix
 
