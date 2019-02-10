@@ -1,12 +1,10 @@
-# espMCUME (M.CU.M.E = Multi CompUter Machine Emulator)
+# M.CU.M.E = Multi CompUter Machine Emulator
 A collection of 80th game Console and Computer emulators for the ESP32 MCU
 <img src="/images/logo.png" width="400" />
 <p float="left">
 </p>
 
-
-
-# M.CU.M.E (Multi CompUter Machine Emulator)
+# Featuring
 5 game consoles are currently supported:
 Atari2600 (espvcs), Philips Videopac/Odyssey (espo2em), Colecovision (espcolem), NES (espnes) and Atari5200 (esp5200).<br>
 4 computer cores:
