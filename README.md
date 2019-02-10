@@ -2,11 +2,6 @@
 A collection of 80th game Console and Computer emulators for the ESP32 MCU
 <img src="/images/logo.png" width="400" />
 <p float="left">
-  <img src="/images/full2.jpg" width="400" />
-  <img src="/images/minimal.jpg" width="400" /> 
-  <img src="/images/zx81hero.jpg" width="400" /> 
-  <img src="/images/spectrumbasic.jpg" width="400" /> 
-  <img src="/images/spectrumdoom.jpg" width="400" /> 
 </p>
 
 
