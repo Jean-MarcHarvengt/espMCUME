@@ -18,8 +18,8 @@ pinout ESP32s board (2x15 pins) GPIO#
 
 
 
-(X)   mandatory pins to connect for the minimum set-up
-(OPT) extra connections for audio and I2C keyboard support
+(X) mandatory pins to connect for the minimum set-up
+(O) optional connections for audio and I2C keyboard support
 
 The keys (all) are using internal pullup so just connect the other side to the GND
 I2C SDA,SCL, USER1 and USER2 requires external pullup.
