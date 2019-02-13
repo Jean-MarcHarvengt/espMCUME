@@ -29,32 +29,32 @@ Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
 # Installation
 - Format the SD card as FAT32
 - extract the content of SD.zip in the root directory 
-- there must be a sub-directorie for each emulator and the default callibration file for the ILI9341 touch screen
-  - "2600" => for vcs, put your Atari 2600 roms here (.bin)
-  - "5200" => for 5200, put your Atari 5200 roms here (.bin)
-  - "800"  => for 800, put your Atari 800 cartridges here (.rom)
-  - 'c64"  => for 64, put your C64 programs here (.prg)
-  - "o2em" => for o2em, put your Videopac/Odysssey roms here (.bin)
+- there must be a sub-directorie for each emulator
+  - "2600" => for atarivcs, put your Atari 2600 roms here (.bin)
+  - "5200" => for atari5200, put your Atari 5200 roms here (.bin)
+  - "800"  => for atari800, put your Atari 800 cartridges here (.rom)
+  - 'c64"  => for c64, put your C64 programs here (.prg)
+  - "o2em" => for oddyssey, put your Videopac/Odysssey roms here (.bin)
   - "coleco" => for colem, put your Colecovision roms here (.rom, including coleco.rom)
   - "nes"  => for nes/nofrendo, put your .nes files here, onlt 32k games are supported (galaga,xevious,mario1...)
-  - "spec" => for speccy, put your ".z80" or ".sna" files here into sub-dirs or not ( max 48K )
-  - "z81"  => for 81, put your ".p", ".81"(, ".56") ".80" or ".o" files here, into sub-dirs or not ( max 56K ) 
-- insert the SD in the ILI9341 SD slot
+  - "spec" => for spectrum, put your ".z80" or ".sna" files here into sub-dirs or not ( max 48K )
+  - "z81"  => for zx81, put your ".p", ".81"(, ".56") ".80" or ".o" files here, into sub-dirs or not ( max 56K ) 
+- insert the SD into the ILI9341 SD slot
 
-# Compilation
+# Compilation/flashing
 - go to espboot directory first:
-- make, make flash => this will install partition table, bootloader and app selector 
+- make, make flash => this will install custom partition table, bootloader and app selector 
 - go to any other directory (one by one!):
 - Adapt ./flashapp.sh according your OS (I use OSX)
 - make, ./flashapp.sh
 
 # Status and known issues
 - 64:
-  - has sound
+  - with sound
   - I2C custom keyboard support! 
   - Many games crashe
 - colem:
-  - has sound!
+  - with sound!
 - vcs:
   - no sound yet
   - limited cartridge size support (due to ram constraint)
@@ -65,10 +65,10 @@ Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
   - Full speend with sound
   - 32k roms only supported
 - 5200:
-  - basic sound support
+  - with sound
   - 16 and 32k roms
 - speccy:
-  - Z80 and SNA support
+  - SNA support (Z80 to be fixed)
   - YM and preliminary buzz sound support
   - 48k games only supported
   - kempston joystick supported but on screen keyboard may not answer in some games
@@ -83,7 +83,7 @@ Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
 - 800:
   - .rom support (no floppy yet)
   - I2C custom keyboard support!
-  - basic sound support
+  - with sound
   
 # Running
 - Select the emulator from the app selector screen and press FIRE (wait a bit that the SD get mounted)
