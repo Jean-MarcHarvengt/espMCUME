@@ -28,12 +28,13 @@
 #include <noftypes.h>
 #include <bitmap.h>
 
+// JMH this file had to be adapted for the ESP
+#include "../emuapi.h"
 
-
-   extern unsigned short *bufline(int j);
 void bmp_clear(const bitmap_t *bitmap, uint8 color)
 {
-   memset(bitmap->data, color, bitmap->pitch * bitmap->height);
+   // 
+   //memset(bitmap->data, color, bitmap->pitch * bitmap->height);
 }
 
 static bitmap_t *_make_bitmap(uint8 *data_addr, bool hw, int width, 
@@ -63,7 +64,7 @@ static bitmap_t *_make_bitmap(uint8 *data_addr, bool hw, int width,
    /* we want to make some 32-bit aligned adjustment
    ** if we haven't been given a hardware bitmap
    */
-   /*
+/*
    if (false == bitmap->hardware)
    {
       bitmap->pitch = (bitmap->pitch + 3) & ~3;
@@ -77,32 +78,29 @@ static bitmap_t *_make_bitmap(uint8 *data_addr, bool hw, int width,
       bitmap->line[i] = bitmap->line[i - 1] + bitmap->pitch;
 */
 
-
-   for (i = 0; i < height; i++) {
-      bitmap->line[i] = bufline(i);
-      //printf("setting up bitmap %d,%d\n", i, (int)bitmap->line[i]);
-   }      
    printf("setting up bitmap %d\n",(int)bitmap);
+   for (i = 0; i < height; i++) {
+      bitmap->line[i] = emu_LineBuffer(i);
+   }      
 
    return bitmap;
 }
 
-#ifdef UNUSED
-
+static char fb[1];
 /* Allocate and initialize a bitmap structure */
 bitmap_t *bmp_create(int width, int height, int overdraw)
 {
-   uint8 *addr;
-   int pitch;
-
-   pitch = width + (overdraw * 2); /* left and right */
-   addr = malloc((pitch * height) + 3); /* add max 32-bit aligned adjustment */
-   if (NULL == addr)
-      return NULL;
-
-   return _make_bitmap(addr, false, width, height, width, overdraw);
+//   uint8 *addr;
+//   int pitch;
+//
+//   pitch = width + (overdraw * 2); /* left and right */
+//   addr = malloc((pitch * height) + 3); /* add max 32-bit aligned adjustment */
+//   if (NULL == addr)
+//      return NULL;
+printf("bmp_create\n");      
+   return _make_bitmap((uint8*)fb, false, width, height, width, overdraw);
 }
-#endif
+
 
 /* allocate and initialize a hardware bitmap */
 bitmap_t *bmp_createhw(uint8 *addr, int width, int height, int pitch)

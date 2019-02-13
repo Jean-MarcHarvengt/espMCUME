@@ -121,7 +121,6 @@ extern bitmap_t *lock_write(void);
 /* TODO: any way to remove this filth (GUI needs it)? */
 bitmap_t *vid_getbuffer(void)
 {
-   primary_buffer = lock_write(); // JMH   
    return primary_buffer;
 }
 

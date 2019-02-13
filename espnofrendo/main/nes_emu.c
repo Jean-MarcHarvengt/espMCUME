@@ -121,14 +121,12 @@ void osd_getinput(void)
 	if (j & MASK_JOY2_BTN)  // A
 		b &= ~0x2000;
 
-	
 	static int oldb=0xffff;
 
 	int chg=b^oldb;
 	int x;
 	oldb=b;
 	event_t evh;
-//	printf("Input: %x\n", b);
 	for (x=0; x<16; x++) {
 		if (chg&1) {
 			evh=event_get(ev[x]);
@@ -158,19 +156,57 @@ int osd_init()
 /*
 ** Video
 */
+static int init(int width, int height)
+{
+	return 0;
+}
 
-static int init(int width, int height);
-static void shutdown(void);
-static int set_mode(int width, int height);
-static void set_palette(rgb_t *pal);
-static void clear(uint8 color);
-bitmap_t *lock_write(void);
-static void free_write(int num_dirties, rect_t *dirty_rects);
-static void custom_blit(bitmap_t *bmp, int num_dirties, rect_t *dirty_rects);
+static void shutdown(void)
+{
+}
+
+static int set_mode(int width, int height)
+{
+   return 0;
+}
+
+static bitmap_t *myBitmap=NULL;
+static void set_palette(rgb_t *pal)
+{
+  int i;
+  for (i = 0; i < PALETTE_SIZE; i++)
+  {
+   	emu_SetPaletteEntry(pal[i].r, pal[i].g, pal[i].b,i);
+  }
+
+}
+
+/* clear all frames to a particular color */
+static void clear(uint8 color)
+{
+}
+
+/* acquire the directbuffer for writing */
 static char fb[1]; //dummy
+static bitmap_t *lock_write(void)
+{
+   if (myBitmap == NULL)
+   	myBitmap = bmp_createhw((uint8*)fb, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH*2);
+
+   return myBitmap;
+}
+
+/* release the resource */
+static void free_write(int num_dirties, rect_t *dirty_rects)
+{
+   //bmp_destroy(&myBitmap);
+}
 
 
-viddriver_t sdlDriver =
+static void custom_blit(bitmap_t *bmp, int num_dirties, rect_t *dirty_rects) {
+}
+
+static viddriver_t sdlDriver =
 {
    "Simple DirectMedia Layer",         /* name */
    init,          /* init */
@@ -195,70 +231,11 @@ void osd_togglefullscreen(int code)
 {
 }
 
-static int init(int width, int height)
-{
-	return 0;
-}
-
-static void shutdown(void)
-{
-}
-
-static int set_mode(int width, int height)
-{
-   return 0;
-}
-
-
-bitmap_t *myBitmap=NULL;
-
-static void set_palette(rgb_t *pal)
-{
-  int i;
-  for (i = 0; i < PALETTE_SIZE; i++)
-  {
-   	emu_SetPaletteEntry(pal[i].r, pal[i].g, pal[i].b,i);
-  }
-
-}
-
-/* clear all frames to a particular color */
-static void clear(uint8 color)
-{
-}
-
-/* acquire the directbuffer for writing */
-bitmap_t *lock_write(void)
-{
-   if (myBitmap == NULL)
-   	myBitmap = bmp_createhw((uint8*)fb, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH*2);
-
-   return myBitmap;
-}
-
-/* release the resource */
-static void free_write(int num_dirties, rect_t *dirty_rects)
-{
-   //bmp_destroy(&myBitmap);
-}
-
-
-static void custom_blit(bitmap_t *bmp, int num_dirties, rect_t *dirty_rects) {
-
-}
-
-
-TimerHandle_t timer;
-
 //Seemingly, this will be called only once. Should call func with a freq of frequency,
 int osd_installtimer(int frequency, void *func, int funcsize, void *counter, int countersize)
 {
-//	printf("Timer install, freq=%d\n", frequency);
-//	timer=xTimerCreate("nes",configTICK_RATE_HZ/frequency, pdTRUE, NULL, func);
-//	xTimerStart(timer, 0);
    return 0;
 }
-
 
 
 char* romdata=NULL;
@@ -267,18 +244,19 @@ char *osd_getromdata() {
     return (char*)romdata;
 }
 
+
+
+
 void nes_Init(void)
 {
   nofrendo_main(0, NULL); 
 }
 
-extern void nes_step(int skip);
 void nes_Step(void)
 {
 	nes_step(emu_FrameSkip());
 	emu_DrawVsync();	
 	vTaskDelay(8 / portTICK_PERIOD_MS);
-    
 }
 
 void nes_Start(char * filename)

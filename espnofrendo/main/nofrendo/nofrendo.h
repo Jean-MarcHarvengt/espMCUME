@@ -53,6 +53,10 @@ extern void main_insert(const char *filename, system_t type);
 extern void main_eject(void);
 extern void main_quit(void);
 
+#ifdef NOLOOP
+extern void nes_step(int skip);
+#endif
+
 #endif /* !_NOFRENDO_H_ */
 
 /*

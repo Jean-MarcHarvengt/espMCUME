@@ -105,9 +105,9 @@ static void snd_Reset(void)
 }
 
 #ifdef CUSTOM_SND 
-//extern "C" {
+extern "C" {
 void SND_Process(void *sndbuffer, int sndn);
-//}
+}
 #endif
 
 
@@ -252,38 +252,39 @@ void AudioPlaySystem::sound(int C, int F, int V) {
 
 void AudioPlaySystem::step(void) 
 {
+  if (playing) {
 #ifdef USE_I2S
-  int left=DEFAULT_SAMPLERATE/50;
+    int left=DEFAULT_SAMPLERATE/50;
 
-  while(left) {
-    int n=DEFAULT_SAMPLESIZE;
-    if (n>left) n=left;
-    snd_Mixer16((uint16_t*)Buffer, n);
-    //16 bit mono -> 16 bit r+l
-    for (int i=n-1; i>=0; i--) {
-      Buffer[i*2+1]=Buffer[i]+32767;
-      Buffer[i*2]=Buffer[i]+32767;
+    while(left) {
+      int n=DEFAULT_SAMPLESIZE;
+      if (n>left) n=left;
+      snd_Mixer16((uint16_t*)Buffer, n);
+      //16 bit mono -> 16 bit r+l
+      for (int i=n-1; i>=0; i--) {
+        Buffer[i*2+1]=Buffer[i]+32767;
+        Buffer[i*2]=Buffer[i]+32767;
+      }
+      i2s_write_bytes(I2S_NUM, (const void*)Buffer, n*4, portMAX_DELAY);
+      left-=n;
     }
-    i2s_write_bytes(I2S_NUM, (const void*)Buffer, n*4, portMAX_DELAY);
-    left-=n;
-  }
 #else
-
-  int32_t CurPos=NextPlayPos;
-  int32_t samples;
-  if (CurPos > LastPlayPos) {
-  	snd_Mixer16((uint16_t *)&Buffer[LastPlayPos], CurPos-LastPlayPos);
-    samples = CurPos-LastPlayPos;
-  }
-  else {
-  	snd_Mixer16((uint16_t *)&Buffer[LastPlayPos], BufferSize-LastPlayPos);
-  	snd_Mixer16((uint16_t *)&Buffer[0], CurPos);
-    samples = BufferSize-LastPlayPos;
-    samples += CurPos;
-  }
-  LastPlayPos = CurPos;
-  //printf("sam %d\n",bytes);
+    int32_t CurPos=NextPlayPos;
+    int32_t samples;
+    if (CurPos > LastPlayPos) {
+      snd_Mixer16((uint16_t *)&Buffer[LastPlayPos], CurPos-LastPlayPos);
+      samples = CurPos-LastPlayPos;
+    }
+    else {
+      snd_Mixer16((uint16_t *)&Buffer[LastPlayPos], BufferSize-LastPlayPos);
+      snd_Mixer16((uint16_t *)&Buffer[0], CurPos);
+      samples = BufferSize-LastPlayPos;
+      samples += CurPos;
+    }
+    LastPlayPos = CurPos;
+    //printf("sam %d\n",bytes);
 #endif    
+  }        
 }
 #endif
 

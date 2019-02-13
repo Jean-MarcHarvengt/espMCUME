@@ -98,15 +98,3 @@ void loop(void)
   //printf("%d\n",(int)((esp_timer_get_time()-t)/1000));  
 } 
 
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-unsigned short * bufline(int j)
-{
-  return tft.getLineBuffer(j);
-}
-#ifdef __cplusplus
-}
-#endif
-
