@@ -19,6 +19,7 @@ extern "C" {
 
 #include <rom/rtc.h>
 #include <string.h>
+#include <math.h>
 #include "mcume.h"
 
 #define RTC_SLOW_MEM ((uint32_t*) 0x50000000)       /*!< RTC slow memory, 8k size */
@@ -63,6 +64,8 @@ static bool menuRedraw=false;
 static int nbFiles=NB_APPS;
 static int curFile=0;
 static int topFile=0;
+static int xOffLogo=0;
+static int swipeAngle=0;
 
 static char * apps[NB_APPS] = {
 "       Zx81       ",
@@ -70,7 +73,8 @@ static char * apps[NB_APPS] = {
 "    Atari 800     ",
 "       C64        ",
 "    Atari 2600    ",
-"     Odyssey      ",
+//"     Odyssey      ",
+"       NES        ",
 "   Colecovision   ",
 "    Atari 5200    "
 };
@@ -79,7 +83,7 @@ static char * apps[NB_APPS] = {
 static void initBootMenu(void) {
   menuRedraw=true;  
   tft.fillScreenNoDma(RGBVAL16(0x00,0x00,0x00));
-  tft.drawSpriteNoDma(30,10,(uint16_t*)logo);
+  //tft.drawSpriteNoDma(30,10,(uint16_t*)logo);
   //tft.drawTextNoDma(0,0, TITLE, RGBVAL16(0x00,0xff,0xff), RGBVAL16(0x00,0x00,0xff), true);  
 }
 
@@ -88,6 +92,10 @@ static void initBootMenu(void) {
 static int handleBootMenu(unsigned short bClick)
 {
   int action = -1;
+  xOffLogo = 16*sin((2*3.14*swipeAngle)/256)+30;
+  swipeAngle = (swipeAngle + 2)&0xff;
+printf("xOffLogo %d %d\n",xOffLogo,swipeAngle);
+  tft.drawSpriteNoDma(xOffLogo,10,(uint16_t*)logo);
 
   if (bClick & MASK_JOY2_UP) {
     if (curFile!=0) {
@@ -187,7 +195,7 @@ static void main_step() {
 #ifdef HAS_SND      
   audio.step();
 #endif     
-  vTaskDelay(20 / portTICK_PERIOD_MS); 
+  //vTaskDelay(20 / portTICK_PERIOD_MS); 
 }
 
 
@@ -235,6 +243,8 @@ void loop(void)
 
 
 void SND_Process( void* stream, int len) {
+#ifdef HAS_SND      
   fc14dec_buffer_fill(decoder,stream,len*2);  
+#endif  
 }
 

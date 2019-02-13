@@ -1052,6 +1052,11 @@ int emu_FrameSkip(void)
   return fskip;
 }
 
+void * emu_LineBuffer(int line)
+{
+  return (void*)tft.getLineBuffer(line);
+}
+
 #ifdef HAS_SND
 #include "AudioPlaySystem.h"
 extern AudioPlaySystem audio;

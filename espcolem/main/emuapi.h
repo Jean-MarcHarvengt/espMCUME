@@ -123,7 +123,7 @@ extern void emu_DrawScreen(unsigned char * VBuf, int width, int height, int stri
 extern void emu_DrawLine(unsigned char * VBuf, int width, int height, int line);
 extern void emu_DrawVsync(void);
 extern int emu_FrameSkip(void);
-
+extern void * emu_LineBuffer(int line);
 
 #endif
 
