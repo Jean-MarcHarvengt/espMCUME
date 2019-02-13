@@ -6,7 +6,7 @@ A collection of 80th game Console and Computer emulators for the ESP32 MCU
 
 # Featuring
 5 game consoles:
-Atari2600 (espvcs), Philips Videopac/Odyssey (espo2em), Colecovision (espcolem), NES (espnes) and Atari5200 (esp5200).<br>
+Atari2600 (espvcs), Philips Videopac/Odyssey (espo2em), Colecovision (espcolem), NES (espnofrendo) and Atari5200 (esp5200).<br>
 4 computer cores:
 Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
 
@@ -36,7 +36,7 @@ Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
   - 'c64"  => for 64, put your C64 programs here (.prg)
   - "o2em" => for o2em, put your Videopac/Odysssey roms here (.bin)
   - "coleco" => for colem, put your Colecovision roms here (.rom, including coleco.rom)
-  - "nes"  => for nes, put your .nes files here, onlt 32k games are supported (galaga,xevious,mario1...)
+  - "nes"  => for nes/nofrendo, put your .nes files here, onlt 32k games are supported (galaga,xevious,mario1...)
   - "spec" => for speccy, put your ".z80" or ".sna" files here into sub-dirs or not ( max 48K )
   - "z81"  => for 81, put your ".p", ".81"(, ".56") ".80" or ".o" files here, into sub-dirs or not ( max 56K ) 
 - insert the SD in the ILI9341 SD slot
@@ -61,10 +61,9 @@ Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
 - o2em:
   - no sound
   - only videopac G7000 games supported (due to ram constraint)
-- nes:
-  - no sound
+- nofrendo:
+  - Full speend with sound
   - 32k roms only supported
-  - needs a little bit of speedup but playable...
 - 5200:
   - basic sound support
   - 16 and 32k roms
@@ -99,6 +98,6 @@ Zx80/Zx81 (esp81), Zx Spectrum (espspeccy), Atari800 (esp800)and C64 (esp64)
 
 # Credits
 I mostly ported the emulators from existing projects, all the credit goes to the authors of
-colem, o2em , x2600, moarnes, mc-4u, sz81, atari800, Vice and jun52 projects!
+colem, o2em , x2600, moarnes, mc-4u, sz81, atari800, Vice, Nofrendo and jun52 projects!
 Thanks a lot also to Frank Boesing for his ILI DMA library from which I started from and his great Teensy64 project https://github.com/FrankBoesing/Teensy64
 
