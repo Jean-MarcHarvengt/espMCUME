@@ -1,5 +1,7 @@
 # M.CU.M.E = Multi CompUter Machine Emulator
-<img src="/images/logo.png" width="400" />
+<p align="center">
+  <img width="460" height="300" src="/images/logo.png">
+</p>
 A collection of 80th game Console and Computer emulators for the ESP32 MCU
 <p float="left">
 <img src="/images/esp321.jpg" width="400" />  
