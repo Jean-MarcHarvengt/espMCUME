@@ -6,8 +6,8 @@
 <img src="/images/esp321.jpg" width="200" />  
 <img src="/images/esp322.jpg" width="200" />  
 </p>
-A collection of 80th game Console and Computer emulators for the ESP32 MCU
-Have a look at the video;
+A collection of 80th game Console and Computer emulators for the ESP32 MCU.<br>
+Have a look at the video:
 https://youtu.be/jlqoWH2X6gk
 
 # Featuring
