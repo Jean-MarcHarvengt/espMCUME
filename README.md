@@ -3,7 +3,7 @@
   <img width="320" height="140" src="/images/logo.png">
 </p>
 A collection of 80th game Console and Computer emulators for the ESP32 MCU
-<p float="center">
+<p align="center">
 <img src="/images/esp321.jpg" width="200" />  
 <img src="/images/esp322.jpg" width="200" />  
 </p>
