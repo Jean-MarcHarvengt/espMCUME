@@ -24,12 +24,11 @@
 */
 
 #include <string.h>
-#include <noftypes.h>
-#include <log.h>
-#include <bitmap.h>
-#include <vid_drv.h>
-#include <gui.h>
-#include <osd.h>
+#include "noftypes.h"
+#include "log.h"
+#include "bitmap.h"
+#include "vid_drv.h"
+#include "osd.h"
 
 /* hardware surface */
 static bitmap_t *screen = NULL;
@@ -370,22 +369,9 @@ int vid_setmode(int width, int height)
       bmp_destroy(&primary_buffer);
 //   if (NULL != back_buffer)
 //      bmp_destroy(&back_buffer);
-
    primary_buffer = bmp_create(width, height, 0); /* no overdraw */
    if (NULL == primary_buffer)
       return -1;
-
-   /* Create our backbuffer */
-#if 0
-   back_buffer = bmp_create(width, height, 0); /* no overdraw */
-   if (NULL == back_buffer)
-   {
-      bmp_destroy(&primary_buffer);
-      return -1;
-   }
-   bmp_clear(back_buffer, GUI_BLACK);
-#endif
-   bmp_clear(primary_buffer, GUI_BLACK);
 
    return 0;
 }
@@ -403,12 +389,6 @@ static int vid_findmode(int width, int height, viddriver_t *osd_driver)
 
    /* re-assert dimensions, clear the surface */
    screen = driver->lock_write();
-
-   /* use custom pageclear, if necessary */
-   if (driver->clear)
-      driver->clear(GUI_BLACK);
-   else
-      bmp_clear(screen, GUI_BLACK);
 
    /* release surface */
    if (driver->free_write)

@@ -14,34 +14,6 @@
 
 typedef struct config_s
 {
-   /* open loads from the disk the saved configuration.
-   **
-   ** open must be the first config function called.
-   **
-   ** open returns true on success, false otherwise.
-   */
-   bool (*open)(void);
-      
-   /* close saves the current configuration to disk.
-   **
-   ** close must be the last config function called.
-   */
-   void (*close)(void);
-
-   /* read_int loads an integer from the configuration into "value"
-   **
-   ** If the specified "key" does not exist, the "def"ault is returned
-   */
-   int (*read_int)(const char *group, const char *key, int def);
-
-   /* read_string copies a string from the configuration into "value"
-   **
-   ** If the specified "key" does not exist, the "def"ault is returned
-   */
-   const char *(*read_string)(const char *group, const char *key, const char *def);
-      
-   void (*write_int)(const char *group, const char *key, int value);
-   void (*write_string)(const char *group, const char *key, const char *value);
    char *filename;
 } config_t;
 

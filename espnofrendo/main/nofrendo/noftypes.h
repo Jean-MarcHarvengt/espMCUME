@@ -26,6 +26,8 @@
 #ifndef _TYPES_H_
 #define _TYPES_H_
 
+
+
 /* Define this if running on little-endian (x86) systems */
 #define  HOST_LITTLE_ENDIAN
 
@@ -62,8 +64,7 @@ typedef enum
 #endif
 #endif /* !__cplusplus */
 
-#include <memguard.h>
-#include <log.h>
+#include "log.h"
 
 #ifdef NOFRENDO_DEBUG
 

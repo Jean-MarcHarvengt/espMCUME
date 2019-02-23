@@ -25,13 +25,14 @@
 #define  DEFAULT_HEIGHT       NES_VISIBLE_HEIGHT
 
 char configfilename[]="na";
+char romname[64];
 
 /* This is os-specific part of main() */
 int osd_main(int argc, char *argv[])
 {
    config.filename = configfilename;
 
-   return main_loop("rom", system_autodetect);
+   return main_loop(romname, system_nes);
 }
 
 /* File system interface */
@@ -259,8 +260,10 @@ void nes_Step(void)
 	vTaskDelay(8 / portTICK_PERIOD_MS);
 }
 
+
 void nes_Start(char * filename)
 {
+	strcpy(romname,filename);
 	int romsize = emu_FileSize(filename);	
 	romdata = (char*)emu_Malloc(romsize);
 	if (romdata)
@@ -275,5 +278,3 @@ void nes_Start(char * filename)
 		}  
 	}
 }
-
-

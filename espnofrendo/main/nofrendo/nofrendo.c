@@ -26,17 +26,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <noftypes.h>
-#include <nofrendo.h>
-#include <event.h>
-#include <nofconfig.h>
-#include <log.h>
-#include <osd.h>
-#include <gui.h>
-#include <vid_drv.h>
+#include "noftypes.h"
+#include "nofrendo.h"
+#include "event.h"
+#include "nofconfig.h"
+#include "log.h"
+#include "osd.h"
+#include "vid_drv.h"
 
 /* emulated system includes */
-#include <nes.h>
+#include "nes.h"
 
 /* our global machine structure */
 static struct
@@ -76,9 +75,8 @@ static void shutdown_everything(void)
       console.nextfilename = NULL;
    }
 
-   config.close();
+   //config.close(); JMH
    osd_shutdown();
-   gui_shutdown();
    vid_shutdown();
    log_shutdown();
 }
@@ -158,20 +156,15 @@ static int internal_insert(const char *filename, system_t type)
    switch (console.type)
    {
    case system_nes:
-      gui_setrefresh(NES_REFRESH_RATE);
-
       console.machine.nes = nes_create();
       if (NULL == console.machine.nes)
       {
          log_printf("Failed to create NES instance.\n");
          return -1;
       }
-
       if (nes_insertcart(console.filename, console.machine.nes))
          return -1;
-
       vid_setmode(NES_SCREEN_WIDTH, NES_VISIBLE_HEIGHT);
-
       if (install_timer(NES_REFRESH_RATE))
          return -1;
 
@@ -226,28 +219,26 @@ int main_loop(const char *filename, system_t type)
    /* register shutdown, in case of assertions, etc. */
 //   atexit(shutdown_everything);
 
-   if (config.open())
-      return -1;
+   //if (config.open()) // JMH
+   //   return -1;
 
    if (osd_init())
-      return -1;
-
-   if (gui_init())
       return -1;
 
    osd_getvideoinfo(&video);
    if (vid_init(video.default_width, video.default_height, video.driver))
       return -1;
-	printf("vid_init done\n");
+	//log printf("vid_init done\n");
 
    console.nextfilename = strdup(filename);
    console.nexttype = type;
 
-   while (false == console.quit)
-   {
+//   while (false == console.quit)
+//   {
+//emu_printf("internal_insert in loop\n");    
       if (internal_insert(console.nextfilename, console.nexttype))
          return 1;
-   }
+//   }
 
    return 0;
 }
