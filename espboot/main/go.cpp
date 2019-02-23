@@ -94,7 +94,7 @@ static int handleBootMenu(unsigned short bClick)
   int action = -1;
   xOffLogo = 16*sin((2*3.14*swipeAngle)/256)+30;
   swipeAngle = (swipeAngle + 2)&0xff;
-printf("xOffLogo %d %d\n",xOffLogo,swipeAngle);
+//printf("xOffLogo %d %d\n",xOffLogo,swipeAngle);
   tft.drawSpriteNoDma(xOffLogo,10,(uint16_t*)logo);
 
   if (bClick & MASK_JOY2_UP) {
